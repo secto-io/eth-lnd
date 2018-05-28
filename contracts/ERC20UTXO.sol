@@ -1,9 +1,9 @@
-pragma solidity ^0.4.10;
+pragma solidity ^0.4.23;
 
 // Based on Alex Miller's design, with minor revisions to appease the compiler, and incorporate Christian Lundkvist's
 // input about hash collisions.
 
-contract ERC20_UTXO {
+contract ERC20UTXO {
     struct UTXO {
         address owner;
         uint value;
@@ -27,7 +27,7 @@ contract ERC20_UTXO {
         return keccak256(block.number, msg.sender, _to, _input);
     }
   
-    function create(address _to, uint _value) { //onlyAdmin() {
+    function create(address _to, uint _value) public { //onlyAdmin() {
         bytes32 id = keccak256(block.number, msg.sender, _to);
         UTXO memory utxo = UTXO(_to, _value, bytes32(0), id);
         utxos[id] = utxo;
