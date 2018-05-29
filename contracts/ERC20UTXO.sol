@@ -1,4 +1,4 @@
-pragma solidity ^0.4.23;
+pragma solidity ^0.4.18;
 
 // Based on Alex Miller's design, with minor revisions to appease the compiler, and incorporate Christian Lundkvist's
 // input about hash collisions.
