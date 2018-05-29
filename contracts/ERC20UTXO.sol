@@ -23,7 +23,7 @@ contract ERC20UTXO {
   
     /// utility for determining the Id. 
     /// _input should be the utxo ID being spent
-    function getId(address _to, bytes32 _input) internal returns(bytes32) {
+    function getId(address _to, bytes32 _input) internal view returns(bytes32) {
         return keccak256(block.number, msg.sender, _to, _input);
     }
   
