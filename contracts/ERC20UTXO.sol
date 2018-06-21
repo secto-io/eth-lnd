@@ -1,4 +1,4 @@
-pragma solidity ^0.4.18;
+pragma solidity 0.4.24;
 
 // Based on Alex Miller's design, with minor revisions to appease the compiler, and incorporate Christian Lundkvist's
 // input about hash collisions.
@@ -24,11 +24,11 @@ contract ERC20UTXO {
     /// utility for determining the Id. 
     /// _input should be the utxo ID being spent
     function getId(address _to, bytes32 _input) internal view returns(bytes32) {
-        return keccak256(block.number, msg.sender, _to, _input);
+        return keccak256(abi.encodePacked(block.number, msg.sender, _to, _input));
     }
   
     function create(address _to, uint _value) public { //onlyAdmin() {
-        bytes32 id = keccak256(block.number, msg.sender, _to);
+        bytes32 id = keccak256(abi.encodePacked(block.number, msg.sender, _to));
         UTXO memory utxo = UTXO(_to, _value, bytes32(0), id);
         utxos[id] = utxo;
         totalSupply += _value;
